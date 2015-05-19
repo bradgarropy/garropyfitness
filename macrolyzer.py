@@ -14,8 +14,11 @@ import myfitnesspal
 def main():
     """Retrieves and analyzes weight and body fat from MyFitnessPal."""
 
+    # retrieve and parse command line arguments
+    args = parse_args()
+
     # create MyFitnessPal client
-    client = myfitnesspal.Client('username', 'password')
+    client = myfitnesspal.Client(args.username, args.password)
 
     # establish a 5 week date range
     today = datetime.date.today()
@@ -43,6 +46,23 @@ def main():
 
         # add the current day to the list of days
         days.append(current_day)
+
+
+
+def parse_args():
+    """Defines command line argument structure and returns arguments."""
+
+    import argparse
+
+    parser = argparse.ArgumentParser()
+
+    # define arguments
+    parser.add_argument("username", help="MyFitnessPal username")
+    parser.add_argument("password", help="MyFitnessPal password")
+    
+    args = parser.parse_args()
+
+    return args
 
 if __name__ == "__main__":
     main()
