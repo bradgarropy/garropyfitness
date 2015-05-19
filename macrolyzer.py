@@ -31,8 +31,8 @@ for delta in range(0, date_range + 1):
 
     # retrieve the values for the current day object
     current_date = today - datetime.timedelta(days=delta)
-    current_weight = weight[current_date]
-    current_body_fat = body_fat[current_date]
+    current_weight = weight.get(current_date, None)
+    current_body_fat = body_fat.get(current_date, None)
 
     # create the day object
     current_day = day.Day(current_date, current_weight, current_body_fat)
