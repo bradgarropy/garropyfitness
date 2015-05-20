@@ -48,6 +48,10 @@ def main():
         days.append(current_day)
 
 
+    # TODO: Calculate week changes
+
+    # TODO: Print to HTML
+
 
 def parse_args():
     """Defines command line argument structure and returns arguments."""
