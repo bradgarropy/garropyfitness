@@ -23,7 +23,7 @@ def main():
 
     # establish a 5 week date range
     start_date = datetime.date.today()
-    end_date = start_date - datetime.timedelta(weeks=5)
+    end_date = start_date - datetime.timedelta(weeks=args.weeks)
 
     # retrieve weight and body fat measurements
     weight = client.get_measurements('Weight', start_date, end_date)
@@ -47,12 +47,22 @@ def parse_args():
 
     import argparse
 
-    parser = argparse.ArgumentParser()
+    # create argument parser
+    parser = argparse.ArgumentParser(
+        description="Macrolyzer - Analyzes weekly weight change over time")
 
     # define arguments
-    parser.add_argument("username", help="MyFitnessPal username")
-    parser.add_argument("password", help="MyFitnessPal password")
-    
+    credentials = parser.add_argument_group("credentials",
+        "MyFitnessPal login information")
+    credentials.add_argument("username", help="MyFitnessPal username")
+    credentials.add_argument("password", help="MyFitnessPal password")
+    parser.add_argument("-w",
+        help="number of weeks to analyze (default: %(default)s)",
+        dest="weeks",
+        type=int,
+        default=5)
+
+    # parse the arguments
     args = parser.parse_args()
 
     return args
