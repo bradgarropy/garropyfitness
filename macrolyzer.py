@@ -7,6 +7,7 @@ Module that tracks weight trends over time.
 
 
 import day
+import week
 import datetime
 import myfitnesspal
 
@@ -47,6 +48,16 @@ def main():
         # add the current day to the list of days
         days.append(current_day)
 
+    weeks = []
+
+    # loop over each week in the range
+    for index in range(0, date_range / 7):
+        upper_bound = index * 7
+        lower_bound = (index + 1) * 7
+
+        days_in_week = days[upper_bound:lower_bound]
+
+        weeks.append(week.Week(days_in_week))
 
     # TODO: Calculate week changes
 
