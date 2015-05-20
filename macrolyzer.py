@@ -22,31 +22,14 @@ def main():
     client = myfitnesspal.Client(args.username, args.password)
 
     # establish a 5 week date range
-    today = datetime.date.today()
-    past = today - datetime.timedelta(weeks=5)
+    start_date = datetime.date.today()
+    end_date = start_date - datetime.timedelta(weeks=5)
 
     # retrieve weight and body fat measurements
-    weight = client.get_measurements('Weight', today, past)
-    body_fat = client.get_measurements('Body Fat', today, past)
+    weight = client.get_measurements('Weight', start_date, end_date)
+    body_fat = client.get_measurements('Body Fat', start_date, end_date)
 
-    # calculate the date range
-    date_range = (today - past).days
-
-    days = []
-
-    # loop over each day in the range
-    for delta in range(0, date_range + 1):
-
-        # retrieve the values for the current day object
-        current_date = today - datetime.timedelta(days=delta)
-        current_weight = weight.get(current_date, None)
-        current_body_fat = body_fat.get(current_date, None)
-
-        # create the day object
-        current_day = day.Day(current_date, current_weight, current_body_fat)
-
-        # add the current day to the list of days
-        days.append(current_day)
+    days = create_days(start_date, end_date, weight, body_fat)
 
     weeks = []
 
@@ -78,6 +61,38 @@ def parse_args():
     args = parser.parse_args()
 
     return args
+
+
+def create_days(start_date, end_date, weight, body_fat):
+    """Create day objects from measurements."""
+
+    current_date = start_date
+    step = datetime.timedelta(days=1)
+
+    date_range = []
+
+    # create a list of dates within the range
+    while current_date >= end_date:
+        date_range.append(current_date)
+        current_date -= step
+
+    days = []
+
+    # loop over each day in the range
+    for date in date_range:
+        # retrieve the values for the current day object
+        current_date = date
+        current_weight = weight.get(current_date, None)
+        current_body_fat = body_fat.get(current_date, None)
+
+        # create the day object
+        current_day = day.Day(current_date, current_weight, current_body_fat)
+
+        # add the current day to the list of days
+        days.append(current_day)
+
+    return days
+
 
 if __name__ == "__main__":
     main()
