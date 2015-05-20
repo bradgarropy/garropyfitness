@@ -29,18 +29,13 @@ def main():
     weight = client.get_measurements('Weight', start_date, end_date)
     body_fat = client.get_measurements('Body Fat', start_date, end_date)
 
+    # create list of day objects for every date in the range
     days = create_days(start_date, end_date, weight, body_fat)
 
-    weeks = []
+    # create week objects from the day objects
+    weeks = create_weeks(days)
 
-    # loop over each week in the range
-    for index in range(0, date_range / 7):
-        upper_bound = index * 7
-        lower_bound = (index + 1) * 7
 
-        days_in_week = days[upper_bound:lower_bound]
-
-        weeks.append(week.Week(days_in_week))
 
     # TODO: Calculate week changes
 
@@ -93,6 +88,25 @@ def create_days(start_date, end_date, weight, body_fat):
 
     return days
 
+
+def create_weeks(days):
+    """Create week objects from measurements."""
+
+    weeks = []
+
+    # loop over each week in the range
+    for index in range(0, len(days), 7):
+
+        # create a slice of seven days
+        days_list = days[index:index + 7]
+
+        # create the week object
+        current_week = week.Week(days_list)
+
+        # add the current week to the list of weeks
+        weeks.append(current_week)
+
+    return weeks
 
 if __name__ == "__main__":
     main()
