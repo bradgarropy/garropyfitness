@@ -12,16 +12,16 @@ class Week(object):
         self.days = days
 
         # averages
-        self.weight_avg = 0
-        self.body_fat_avg = 0
-        self.fat_mass_avg = 0
-        self.lean_body_mass_avg = 0
+        self.weight_avg = None
+        self.lean_body_mass_avg = None
+        self.fat_mass_avg = None
+        self.body_fat_avg = None
 
         # deltas
-        self.weight_delta = 0
-        self.body_fat_delta = 0
-        self.fat_mass_delta = 0
-        self.lean_body_mass_delta = 0
+        self.weight_delta = None
+        self.lean_body_mass_delta = None
+        self.fat_mass_delta = None
+        self.body_fat_delta = None
 
         # calculate weight average
         for day in days:
