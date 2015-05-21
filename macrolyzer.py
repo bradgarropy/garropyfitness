@@ -34,9 +34,24 @@ def main():
     # create week objects from the day objects
     weeks = create_weeks(days)
 
+    # calculate changes over time
+    for week in weeks:
 
+        # only calulate change if it is not the last week
+        if weeks.index(week) == len(weeks) - 1:
+            continue
 
-    # TODO: Calculate week changes
+        # retrieve the previous week
+        prev_week_index = weeks.index(week) + 1
+        prev_week = weeks[prev_week_index]
+
+        # calculate the difference between the measurement values
+        week.weight_delta = week.weight_avg - prev_week.weight_avg
+        week.lean_body_mass_delta = (week.lean_body_mass_avg -
+                                     prev_week.lean_body_mass_avg)
+        week.fat_mass_delta = week.fat_mass_avg - prev_week.fat_mass_avg
+        week.body_fat_delta = week.body_fat_avg - prev_week.body_fat_avg
+
 
     # TODO: Print to HTML
 
