@@ -24,29 +24,24 @@ class Week(object):
         self.body_fat_delta = None
 
         # calculate weight average
-        for day in days:
-            self.weight_avg += day.weight
-
-        self.weight_avg = self.weight_avg/len(days)
-        self.weight_avg = round(self.weight_avg, 1)
-
-        # calculate body fat average
-        for day in days:
-            self.body_fat_avg += day.body_fat
-
-        self.body_fat_avg = self.body_fat_avg/len(days)
-        self.body_fat_avg = round(self.body_fat_avg, 1)
-
-        # calculate fat mass average
-        for day in days:
-            self.fat_mass_avg += day.fat_mass
-
-        self.fat_mass_avg = self.fat_mass_avg/len(days)
-        self.fat_mass_avg = round(self.fat_mass_avg, 1)
+        avg_list = [day.weight for day in days if day.weight]
+        self.weight_avg = average(avg_list)
 
         # calculate lean body mass average
-        for day in days:
-            self.lean_body_mass_avg += day.lean_body_mass
+        avg_list = [day.lean_body_mass for day in days if day.lean_body_mass]
+        self.lean_body_mass_avg = average(avg_list)
 
-        self.lean_body_mass_avg = self.lean_body_mass_avg/len(days)
-        self.lean_body_mass_avg = round(self.lean_body_mass_avg, 1)
+        # calculate fat mass average
+        avg_list = [day.fat_mass for day in days if day.fat_mass]
+        self.fat_mass_avg = average(avg_list)
+        
+        # calculate body fat average
+        avg_list = [day.body_fat for day in days if day.body_fat]
+        self.body_fat_avg = average(avg_list)
+
+
+def average(avg_list):
+    avg = sum(avg_list) / len(avg_list)
+    avg = round(avg, 1)
+
+    return avg
