@@ -37,6 +37,10 @@ def main():
     # calculate measurement changes week over week
     calculate_changes(weeks)
 
+    # print weekly trend
+    for week in weeks:
+        print week
+        print
 
     # TODO: Print to HTML
 
