@@ -39,6 +39,32 @@ class Week(object):
         avg_list = [day.body_fat for day in days if day.body_fat]
         self.body_fat_avg = average(avg_list)
 
+    def __str__(self):
+        week_string = ""
+
+        for day in self.days:
+            week_string += str(day) + '\n'
+
+        week_string += '\n'
+
+        week_string += "%5s   w: %5s   lbm: %5s   fm: %5s   bf: %5s" % (
+            "avg",
+            self.weight_avg,
+            self.lean_body_mass_avg,
+            self.fat_mass_avg,
+            self.body_fat_avg)
+
+        week_string += '\n'
+
+        week_string += "%5s   w: %5s   lbm: %5s   fm: %5s   bf: %5s" % (
+            "delta",
+            self.weight_delta,
+            self.lean_body_mass_delta,
+            self.fat_mass_delta,
+            self.body_fat_delta)
+
+        return week_string
+
 
 def average(avg_list):
     """Averages all values in the list."""
