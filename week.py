@@ -34,13 +34,15 @@ class Week(object):
         # calculate fat mass average
         avg_list = [day.fat_mass for day in days if day.fat_mass]
         self.fat_mass_avg = average(avg_list)
-        
+
         # calculate body fat average
         avg_list = [day.body_fat for day in days if day.body_fat]
         self.body_fat_avg = average(avg_list)
 
 
 def average(avg_list):
+    """Averages all values in the list."""
+
     avg = sum(avg_list) / len(avg_list)
     avg = round(avg, 1)
 

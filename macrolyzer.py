@@ -6,8 +6,6 @@ Module that tracks weight trends over time.
 """
 
 
-import day
-import week
 import datetime
 import myfitnesspal
 
@@ -23,8 +21,8 @@ def main():
 
     # establish a date range
     start_date = datetime.date.today()
-    end_date = (start_date - datetime.timedelta(weeks=args.weeks)
-                           + datetime.timedelta(days=1))
+    end_date = (start_date - datetime.timedelta(weeks=args.weeks) +
+                datetime.timedelta(days=1))
 
     # retrieve weight and body fat measurements
     weight = client.get_measurements('Weight', start_date, end_date)
@@ -54,14 +52,15 @@ def parse_args():
 
     # define arguments
     credentials = parser.add_argument_group("credentials",
-        "MyFitnessPal login information")
+                                            "MyFitnessPal login information")
     credentials.add_argument("username", help="MyFitnessPal username")
     credentials.add_argument("password", help="MyFitnessPal password")
     parser.add_argument("-w",
-        help="number of weeks to analyze (default: %(default)s)",
-        dest="weeks",
-        type=int,
-        default=5)
+                        help="number of weeks to analyze \
+                              (default: %(default)s)",
+                        dest="weeks",
+                        type=int,
+                        default=5)
 
     # parse the arguments
     args = parser.parse_args()
@@ -71,6 +70,8 @@ def parse_args():
 
 def create_days(start_date, end_date, weight, body_fat):
     """Create day objects from measurements."""
+
+    import day
 
     current_date = start_date
     step = datetime.timedelta(days=1)
@@ -102,6 +103,8 @@ def create_days(start_date, end_date, weight, body_fat):
 
 def create_weeks(days):
     """Create week objects from measurements."""
+
+    import week
 
     weeks = []
 
