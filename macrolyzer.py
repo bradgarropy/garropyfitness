@@ -21,9 +21,10 @@ def main():
     # create MyFitnessPal client
     client = myfitnesspal.Client(args.username, args.password)
 
-    # establish a 5 week date range
+    # establish a date range
     start_date = datetime.date.today()
-    end_date = start_date - datetime.timedelta(weeks=args.weeks)
+    end_date = (start_date - datetime.timedelta(weeks=args.weeks)
+                           + datetime.timedelta(days=1))
 
     # retrieve weight and body fat measurements
     weight = client.get_measurements('Weight', start_date, end_date)
