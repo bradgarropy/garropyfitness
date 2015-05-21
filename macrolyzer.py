@@ -122,6 +122,7 @@ def create_weeks(days):
 
     return weeks
 
+
 def calculate_changes(weeks):
     """Calculates changes in measurements each week."""
 
