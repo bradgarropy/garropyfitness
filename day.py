@@ -24,3 +24,14 @@ class Day(object):
             # calculate lean body mass
             self.lean_body_mass = self.weight - self.fat_mass
             self.lean_body_mass = round(self.lean_body_mass, 1)
+
+    def __str__(self):
+        day_string = "%5s   w: %5s   lbm: %5s   fm: %5s   bf: %5s   d: %s" % (
+            "day",
+            self.weight,
+            self.lean_body_mass,
+            self.fat_mass,
+            self.body_fat,
+            str(self.date))
+
+        return day_string
