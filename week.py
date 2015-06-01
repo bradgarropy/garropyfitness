@@ -47,8 +47,9 @@ class Week(object):
 
         week_string += '\n'
 
-        week_string += "%5s   w: %5s   lbm: %5s   fm: %5s   bf: %5s" % (
-            "avg",
+        week_string += "%5s   " % ("avg")
+
+        week_string += "w: %5.5s   lbm: %5.5s   fm: %5.5s   bf: %5.5s" % (
             self.weight_avg,
             self.lean_body_mass_avg,
             self.fat_mass_avg,
@@ -56,8 +57,9 @@ class Week(object):
 
         week_string += '\n'
 
-        week_string += "%5s   w: %5s   lbm: %5s   fm: %5s   bf: %5s" % (
-            "delta",
+        week_string += "%5s   " % ("delta")
+
+        week_string += "w: %5.5s   lbm: %5.5s   fm: %5.5s   bf: %5.5s" % (
             self.weight_delta,
             self.lean_body_mass_delta,
             self.fat_mass_delta,
@@ -70,6 +72,5 @@ def average(avg_list):
     """Averages all values in the list."""
 
     avg = sum(avg_list) / len(avg_list)
-    avg = round(avg, 1)
 
     return avg
