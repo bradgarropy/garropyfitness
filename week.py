@@ -71,6 +71,9 @@ class Week(object):
 def average(avg_list):
     """Averages all values in the list."""
 
+    if len(avg_list) == 0:
+        return 0
+    
     avg = sum(avg_list) / len(avg_list)
 
     return avg
