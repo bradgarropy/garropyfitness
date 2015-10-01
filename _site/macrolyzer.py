@@ -19,10 +19,8 @@ def main():
     # create MyFitnessPal client
     client = myfitnesspal.Client(args.username, args.password)
 
-    # establish a date range, weeks go from Monday to Sunday
+    # establish a date range
     start_date = datetime.date.today()
-    while start_date.weekday() != 6:
-        start_date += datetime.timedelta(days=1)
     end_date = (start_date - datetime.timedelta(weeks=args.weeks) +
                 datetime.timedelta(days=1))
 
