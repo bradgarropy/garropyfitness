@@ -67,6 +67,11 @@ def parse_args():
                         dest="weeks",
                         type=int,
                         default=5)
+    parser.add_argument("-r",
+                        help="generate an HTML report",
+                        action='store_true',
+                        dest="report",
+                        default=False)
 
     # parse the arguments
     args = parser.parse_args()
