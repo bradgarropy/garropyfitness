@@ -1,2 +1,7 @@
 #Python Bytecode
 *.pyc
+
+#Packaging
+build/
+dist/
+*.egg-info/
